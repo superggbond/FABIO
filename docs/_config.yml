@@ -1,9 +1,9 @@
 remote_theme: allejo/jekyll-docs-theme
-name: FABIO (command-line version)
+name: FABIO
 
 project:
   version: 1.0.0
-  download_url: https://github.com/superggbond/FABIO-command-line-tool/
+  download_url: https://github.com/superggbond/fabio/
   download_text: Download
 
 license:
@@ -15,20 +15,20 @@ links:
     - title: GitHub
       icon: github
       brand: true
-      url: https://github.com/superggbond/FABIO-command-line-tool/
+      url: https://github.com/superggbond/fabio/
   homepage:
     - title: View on GitHub
       icon: github
       brand: true
-      url: https://github.com/superggbond/FABIO-command-line-tool/
+      url: https://github.com/superggbond/fabio/
   footer:
     - title: GitHub
       icon: github
       brand: true
-      url: https://github.com/superggbond/FABIO-command-line-tool/
+      url: https://github.com/superggbond/fabio/
     - title: Issues
       icon: bug
-      url: https://github.com/superggbond/FABIO-command-line-tool/issues
+      url: https://github.com/superggbond/fabio/issues
 
 ui:
   mode: 'auto' # 'auto', 'dark', 'light'
@@ -57,7 +57,7 @@ ui:
 social:
   github:
     user: superggbond
-    repo: FABIO-command-line-tool
+    repo: fabio
   twitter:
     enabled: false
     via:
