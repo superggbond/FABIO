@@ -2,16 +2,28 @@
 % Please edit documentation in R/FABIO.R
 \name{fabio}
 \alias{fabio}
-\title{fabio}
+\title{The main function to perform TWAS fine-mapping on binary outcomes}
 \usage{
 fabio(X, y, w_step = 6000, s_step = 20000)
 }
 \arguments{
-\item{X}{Input matrix}
+\item{X}{Input predicted GReX matrix}
+
+\item{y}{A vector of binary phenotypes of TWAS}
+
+\item{w_step}{The number of warm-up steps in MCMC, default = 6000}
+
+\item{s_step}{The number of sampling steps in MCMC, default = 20000}
 }
 \value{
 PIP summary table
 }
 \description{
-fabio
+The main function to perform TWAS fine-mapping on binary outcomes
+}
+\examples{
+data(example)
+X <- obj[[1]]
+y <- obj[[2]]
+output <- fabio(X, y, 100, 1000)
 }
