@@ -18,6 +18,5 @@ library(fabio)
 ```
 #### 2. Check the input options included in `FABIO`
 ```
-cd ./FABIO-command-line-tool/scripts
-Rscript ./FABIO.R -h
+?fabio
 ```
