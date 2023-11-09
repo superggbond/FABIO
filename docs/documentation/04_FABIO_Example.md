@@ -18,7 +18,8 @@ library(fabio)
 data(example)
 grex <- obj[[1]]
 y <- obj[[2]]
-output <- fabio(grex, y, w_step=100, s_step=1000) # w_step and s_step are set to be small for a shorter running time as an example here
+output <- fabio(grex, y, w_step=100, s_step=1000)
+# w_step and s_step are set to be small for a shorter running time as an example here
 ```
 The inputs are:
 - grex: the predicted GReX matrix dataframe
