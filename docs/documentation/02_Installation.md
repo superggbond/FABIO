@@ -4,15 +4,17 @@ title: Installation
 description: ~
 ---
 
-`FABIO` is implemented as a command-line tool, which can be installed from GitHub.
+`FABIO` is implemented as a R package, which can be installed from GitHub.
 
 ### Dependencies 
-* R libraries: Rcpp, RcppArmadillo, data.table, and optparse
-* When running the main command-line tool 'FABIO.R', it will automatically check and install all required R packages.
+* R libraries: Rcpp, RcppArmadillo, data.table
 
 #### 1. Install `FABIO`
-```
-git clone https://github.com/superggbond/FABIO-command-line-tool.git
+```{r}
+if(!require(devtools))
+  install.packages(devtools)
+devtools::install_github("superggbond/fabio")
+library(fabio)
 ```
 #### 2. Check the input options included in `FABIO`
 ```
