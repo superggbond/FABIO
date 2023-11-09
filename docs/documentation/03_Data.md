@@ -7,9 +7,9 @@ There are two major input files for FABIO to perform TWAS fine-mapping on a bina
 #### 1. Predicted GReX matrix of the TWAS cohort
   * An example R dataframe can be loaded from the FABIO package:
  ```
- library(fabio)
- data(example)
- grex = obj[[1]]
+    library(fabio)
+    data(example)
+    grex = obj[[1]]
  ```
   
 #### 2. Binary phenotype of the TWAS cohort
