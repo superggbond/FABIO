@@ -22,7 +22,7 @@ output <- fabio(grex, y, w_step=100, s_step=1000)
 # w_step and s_step are set to be small for a shorter running time as an example here
 ```
 The inputs are:
-- grex: the predicted GReX matrix dataframe
+- grex: the predicted GReX matrix
 - y: the TWAS phenotype vector
 - w-step: the number of warm-up steps in MCMC, default = 6000
 - s-step: the number of sampling steps in MCMC, default = 20000
