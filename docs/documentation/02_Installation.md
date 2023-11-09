@@ -7,7 +7,7 @@ description: ~
 `FABIO` is implemented as a R package, which can be installed from GitHub.
 
 ### Dependencies 
-* R libraries: Rcpp, RcppArmadillo, data.table
+* R libraries: Rcpp, RcppArmadillo, RcppProgress, data.table
 
 #### 1. Install `FABIO`
 ```r
