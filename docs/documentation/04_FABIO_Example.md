@@ -18,14 +18,13 @@ library(fabio)
 data(example)
 grex <- obj[[1]]
 y <- obj[[2]]
-output <- fabio(grex, y, 100, 1000)
+output <- fabio(grex, y, w_step=100, s_step=1000) # w_step and s_step are set to be small for a shorter running time as an example here
 ```
-The essential inputs are:
+The inputs are:
 - grex: the predicted GReX matrix dataframe
 - y: the TWAS phenotype vector
-- -w (--w-step): the number of warm-up steps in MCMC
-- -s (--s-step): the number of sampling steps in MCMC
-- -o (--out): specify the name of the output file
+- w-step: the number of warm-up steps in MCMC, default = 6000
+- s-step: the number of sampling steps in MCMC, default = 20000
 
 ### 3. FABIO output
 FABIO will output a summary table with two columns: 
