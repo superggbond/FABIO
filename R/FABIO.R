@@ -1,7 +1,17 @@
-#' fabio
-#'@param X Input matrix
+#'The main function to perform TWAS fine-mapping on binary outcomes
+#'@param X Input predicted GReX matrix
+#'@param y A vector of binary phenotypes of TWAS
+#'@param w_step The number of warm-up steps in MCMC, default = 6000
+#'@param s_step The number of sampling steps in MCMC, default = 20000
 #'
 #'@return PIP summary table
+#'@export
+#'
+#'@examples
+#'data(example)
+#'X <- obj[[1]]
+#'y <- obj[[2]]
+#'output <- fabio(X, y, 100, 1000)
 
 fabio = function(X, y, w_step=6000, s_step=20000){
   cat('\n### All required packages are successfully loaded.\n')
@@ -18,34 +28,34 @@ fabio = function(X, y, w_step=6000, s_step=20000){
   
   ## pre-define basic parameters
   # number of analyzed individuals
-  ni_test = nrow(X)
+  ni_test <- nrow(X)
   # number of analyzed genes
-  ng_test = ncol(X)
-  pve_null = 0
-  n_accept = 0
+  ng_test <- ncol(X)
+  pve_null <- 0
+  n_accept <- 0
   # -hmax, -hmin, h for PVE
-  h_min = 0
-  h_max = 1
+  h_min <- 0
+  h_max <- 1
   # -hscale
-  h_scale = min(1, 10 / sqrt(ni_test))
+  h_scale <- min(1, 10 / sqrt(ni_test))
   # -pmin, -pmax, log(pi)
-  logp_min = -log(ng_test)
-  logp_max = 0
+  logp_min <- -log(ng_test)
+  logp_max <- 0
   # -pscale
-  logp_scale = min(1, 5 / sqrt(ni_test))
+  logp_scale <- min(1, 5 / sqrt(ni_test))
   # -gmin, -gmax, range of n_gamma, n_gamma: number of gamma
-  g_min = 0
-  g_max = 300
+  g_min <- 0
+  g_max <- 300
   # -rpace, record one state in every [num] steps (default 10)
-  r_pace = 10
+  r_pace <- 10
   # -wpace, write values down in every [num] recorded steps (default 1000)
-  w_pace = 1000
+  w_pace <- 1000
   # -mh, number of M-H steps per iteration
-  n_mh = 10
+  n_mh <- 10
   # -gmean, the given mean of expected number of genes in final model
-  geo_mean = 2000
-  trace_G = 0
-  randseed = -1
+  geo_mean <- 2000
+  trace_G <- 0
+  randseed <- -1
   
   if (ng_test < 300) {g_max = ng_test}
   # pre-allocate
