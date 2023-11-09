@@ -13,4 +13,9 @@ There are two major input files for FABIO to perform TWAS fine-mapping on a bina
  ```
   
 #### 2. Binary phenotype of the TWAS cohort
-  * [Phenotype file](https://github.com/superggbond/FABIO-command-line-tool/blob/main/data/pheno.txt)
+  * An example R vector coding case as 1 and control as 0 can be loaded from the FABIO package:
+ ```
+    library(fabio)
+    data(example)
+    y = obj[[2]]
+ ``` 
