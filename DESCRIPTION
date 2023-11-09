@@ -1,13 +1,16 @@
 Package: fabio
 Type: Package
-Title: What the Package Does in One 'Title Case' Line
+Title: Fine-mApping of causal genes for BInary Outcomes
 Version: 1.0
 Date: 2023-10-17
-Author: Your Name
-Maintainer: Your Name <your@email.com>
-Description: One paragraph description of what the package does as one or more full
-          sentences.
+Author: Haihan Zhang
+Maintainer: Haihan Zhang <hhzhang@umich.edu>
+Description: This package performs TWAS fine-mapping on binary outcomes 
+            by jointly modeling all genes located on the same chromosome, and provides 
+            the posterior inclusion probability (PIP) as an important 
+            measure of evidence for the gene’s association with the outcome trait.
 License: GPL (>= 2)
 Imports: Rcpp (>= 1.0.11), RcppArmadillo, RcppProgress, data.table
 LinkingTo: Rcpp, RcppArmadillo, RcppProgress
+Encoding: UTF-8
 RoxygenNote: 7.2.3
