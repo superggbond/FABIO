@@ -11,8 +11,7 @@ description: ~
 
 #### 1. Install `FABIO`
 ```r
-if(!require(devtools))
-  install.packages(devtools)
+install.packages(devtools)
 devtools::install_github("superggbond/fabio")
 library(fabio)
 ```
