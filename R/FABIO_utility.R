@@ -8,7 +8,7 @@ CalcPgamma = function(geo_mean, ng_test) {
 }
 
 # function to initiate MCMC
-InitialMCMC = function(UtX, Uty, pos_loglr) {
+InitialMCMC = function(pos_loglr, ng_test, g_max, g_min, pve_null, h_min, h_max, logp_min, logp_max) {
   q_genome = qchisq(0.05 / ng_test, 1, lower.tail = F)
   cHyp = list(n_gamma = 0)
   for (i in 1:nrow(pos_loglr)) {
@@ -40,7 +40,7 @@ InitialMCMC = function(UtX, Uty, pos_loglr) {
 }
 
 # function to propose the new gamma
-ProposeGamma = function(rank_old, p_gamma, cHyp_old, cHyp_new, rep) {
+ProposeGamma = function(rank_old, p_gamma, cHyp_old, cHyp_new, rep, g_max, g_min, ng_test) {
   # sample rv from discrete
   sample_discrete = function(n) {
     sample(x = 1:ng_test, n, replace = T, prob = p_gamma)
@@ -152,7 +152,7 @@ ProposeGamma = function(rank_old, p_gamma, cHyp_old, cHyp_new, rep) {
 
 # function to set up Xgamma matrix
 SetXgamma = function(X, X_old, XtX_old, Xty_old, y, rank_old, rank_new, X_new, XtX_new, Xty_new) {
-  # rank_old and rank_new are sorted already inside PorposeGamma
+  # rank_old and rank_new are sorted already inside ProposeGamma
   # calculate vectors rank_remove and rank_add.
   rank_remove = setdiff(rank_old, rank_new)
   if (identical(rank_remove, integer(0))) {rank_remove = 0}
