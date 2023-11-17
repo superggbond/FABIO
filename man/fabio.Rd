@@ -22,8 +22,11 @@ PIP summary table
 The main function to perform TWAS fine-mapping on binary outcomes
 }
 \examples{
-data(example)
-X <- obj[[1]]
-y <- obj[[2]]
+# example.rda can be downloaded from: 
+# https://www.dropbox.com/scl/fi/hhdjl7ep881cv8fx2hbdk/example.rda?rlkey=zanf4tyeqar49lhpu0efbpipf&dl=0
+
+load('/path/to/example.rda')
+X <- inputs[[1]]
+y <- inputs[[2]]
 output <- fabio(X, y, 100, 1000)
 }
