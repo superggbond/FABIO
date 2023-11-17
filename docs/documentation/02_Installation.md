@@ -7,15 +7,15 @@ description: ~
 `FABIO` is implemented as a R package, which can be installed from GitHub.
 
 ### Dependencies 
-* R libraries: Rcpp, RcppArmadillo, RcppProgress, data.table
+* R libraries: Rcpp, RcppArmadillo, RcppProgress
 
 #### 1. Install `FABIO`
 ```r
 install.packages(devtools)
-devtools::install_github("superggbond/fabio")
-library(fabio)
+devtools::install_github("superggbond/FABIO")
+library(FABIO)
 ```
-#### 2. Check the input options included in `FABIO`
+#### 2. Check the input options for the main function included in `FABIO`
 ```r
 ?fabio
 ```
