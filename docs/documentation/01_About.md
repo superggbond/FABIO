@@ -11,7 +11,7 @@ Haihan Zhang, Kevin He, Lam C. Tsoi, and Xiang Zhou#. FABIO: TWAS Fine-mapping t
 
 Contact
 -------------------
-For any questions or feedbacks on FABIO software, please feel free to leave messages on the [github issues](https://github.com/superggbond/fabio/issues) or contact me through email: hhzhang@umich.edu
+For any questions or feedbacks on FABIO software, please feel free to leave messages on the [github issues](https://github.com/superggbond/FABIO/issues) or contact me through email: hhzhang@umich.edu
 
 Our group
 -------------------
