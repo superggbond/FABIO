@@ -1,4 +1,3 @@
-useDynLib(fabio, .registration=TRUE)
+useDynLib(FABIO, .registration=TRUE)
 importFrom(Rcpp, evalCpp)
 exportPattern("^[[:alpha:]]+")
-importFrom(data.table, fread)
