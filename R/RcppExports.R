@@ -21,11 +21,11 @@ ProposeH <- function(cHyp_old, rep, h_max, h_min, h_scale) {
     .Call(`_FABIO_ProposeH`, cHyp_old, rep, h_max, h_min, h_scale)
 }
 
-ProposePi <- function(cHyp_old, cHyp_new, rep, logp_max, logp_min, logp_scale) {
-    .Call(`_FABIO_ProposePi`, cHyp_old, cHyp_new, rep, logp_max, logp_min, logp_scale)
+ProposePi <- function(cHyp_old, cHyp_new, rep, logp_max, logp_min, logp_scale, beta_a, beta_b) {
+    .Call(`_FABIO_ProposePi`, cHyp_old, cHyp_new, rep, logp_max, logp_min, logp_scale, beta_a, beta_b)
 }
 
-mcmc_iter <- function(total_step, w_step, r_pace, w_pace, n_mh, ng_test, ni_test, h_max, h_min, h_scale, g_max, g_min, logp_max, logp_min, logp_scale, y, z_hat, z, rank_old, beta_old, beta_new, Xtz_old, Xtz_new, Xb_old, Xb_new, p_gamma, pos_vec, cHyp_old, X, Xgamma_old, Xgamma_new, XtX_old, XtX_new, Result_hyp, Result_gamma, beta_g, display_progress = TRUE) {
-    .Call(`_FABIO_mcmc_iter`, total_step, w_step, r_pace, w_pace, n_mh, ng_test, ni_test, h_max, h_min, h_scale, g_max, g_min, logp_max, logp_min, logp_scale, y, z_hat, z, rank_old, beta_old, beta_new, Xtz_old, Xtz_new, Xb_old, Xb_new, p_gamma, pos_vec, cHyp_old, X, Xgamma_old, Xgamma_new, XtX_old, XtX_new, Result_hyp, Result_gamma, beta_g, display_progress)
+mcmc_iter <- function(total_step, w_step, r_pace, w_pace, n_mh, ng_test, ni_test, h_max, h_min, h_scale, g_max, g_min, logp_max, logp_min, logp_scale, beta_a, beta_b, y, z_hat, z, rank_old, beta_old, beta_new, Xtz_old, Xtz_new, Xb_old, Xb_new, p_gamma, pos_vec, cHyp_old, X, Xgamma_old, Xgamma_new, XtX_old, XtX_new, Result_hyp, Result_gamma, beta_g, display_progress = TRUE) {
+    .Call(`_FABIO_mcmc_iter`, total_step, w_step, r_pace, w_pace, n_mh, ng_test, ni_test, h_max, h_min, h_scale, g_max, g_min, logp_max, logp_min, logp_scale, beta_a, beta_b, y, z_hat, z, rank_old, beta_old, beta_new, Xtz_old, Xtz_new, Xb_old, Xb_new, p_gamma, pos_vec, cHyp_old, X, Xgamma_old, Xgamma_new, XtX_old, XtX_new, Result_hyp, Result_gamma, beta_g, display_progress)
 }
 

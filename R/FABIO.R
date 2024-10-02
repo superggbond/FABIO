@@ -1,22 +1,27 @@
 #'The main function to perform TWAS fine-mapping on binary outcomes
 #'@param X Input predicted GReX matrix
 #'@param y A vector of binary phenotypes of TWAS
+#'@param beta_a alpha of the prior beta distribution on pi, both a and b are 0 by default, leading to a uniform prior on log pi
+#'@param beta_b beta of the prior beta distribution on pi, both a and b are 0 by default, leading to a uniform prior on log pi
 #'@param w_step The number of warm-up steps in MCMC, default = 6000
 #'@param s_step The number of sampling steps in MCMC, default = 20000
+#'@param save_dir The directory where the output file will be saved, set to be the working directory by default
 #'
-#'@return PIP summary table
+#'@return The results will be saved as a csv file 
 #'@export
 #'
 #'@examples
-#'# example.rda can be downloaded from: 
-#'# https://www.dropbox.com/scl/fi/hhdjl7ep881cv8fx2hbdk/example.rda?rlkey=zanf4tyeqar49lhpu0efbpipf&dl=0
+#'# example files can be downloaded from: 
+#'# https://www.dropbox.com/scl/fo/fxynm8uvedgvy7ni6hcbt/AAfTQVo89s78DsRNwpBH3lU?rlkey=nbqwrdi2r5y1bbojzf7z8ev7h&st=yz28n4nj&dl=0
 #'
-#'load('/path/to/example.rda')
-#'X <- inputs[[1]]
-#'y <- inputs[[2]]
-#'output <- fabio(X, y, 100, 1000)
+#'library(FABIO)
+#'
+#'grex <- data.table::fread('./example_grex.txt.gz')
+#'pheno <- scan('./example_pheno.txt',numeric())
+#'fabio(X=grex, y=pheno, w_step=100, s_step=1000)
+#'# The results will be saved as a file named "FABIO_out.csv"
 
-fabio = function(X, y, w_step=6000, s_step=20000){
+fabio = function(X, y, beta_a=0, beta_b=0, w_step=6000, s_step=20000, save_dir='.'){
   X = as.data.frame(X)
   gene_names = as.vector(X[,1])
   X = scale(t(X[,-1]))
@@ -26,6 +31,14 @@ fabio = function(X, y, w_step=6000, s_step=20000){
   start_time = Sys.time()
   cat('\n### Analysis starts at',format(Sys.time(), "%Y-%m-%d %H:%M:%S %Z"))
   cat('\n')
+  
+  if(beta_a==0&beta_b==0){
+    cat('\n### Applying prior of uniform distribution on log pi')
+    cat('\n')
+  }else{
+    cat(paste0('\n### Applying prior of beta distribution on pi: a=',beta_a,'  b=',beta_b))
+    cat('\n')
+  }
   
   ## pre-define basic parameters
   # number of analyzed individuals
@@ -132,7 +145,7 @@ fabio = function(X, y, w_step=6000, s_step=20000){
   
   output = mcmc_iter(total_step, w_step, r_pace, w_pace, n_mh, ng_test, ni_test,
                      h_max, h_min, h_scale, g_max, g_min,
-                     logp_max, logp_min, logp_scale,
+                     logp_max, logp_min, logp_scale, beta_a, beta_b,
                      y, z_hat, z, rank_old, beta_old, beta_new,
                      Xtz_old, Xtz_new, Xb_old, Xb_new, p_gamma,
                      pos_vec, cHyp_old, X, Xgamma_old, Xgamma_new, XtX_old, XtX_new,
@@ -159,7 +172,18 @@ fabio = function(X, y, w_step=6000, s_step=20000){
   param = as.data.frame(cbind(gene_names,param))
   param = param[,c(1,3)]
   colnames(param) = c("Gene","PIP")
+  param$PIP = as.numeric(param$PIP)
   param = param[order(param$PIP,decreasing = T),]
+  locFDR = 1-param$PIP
   
-  return(param)
+  # estimate FDR for each gene
+  param$estFDR = NA
+  for (i in 1:nrow(param)){
+    estFDR = ifelse(sum(locFDR[1:i])<=1,sum(locFDR[1:i]),1)
+    param[i,'estFDR'] = estFDR
+  }
+  
+  cat('\n### Saving outputs')
+  write.table(param,paste0(save_dir,'/FABIO_out.csv'),row.names = F,col.names = T,sep = ',',quote = F)
+  cat('\n### Done!\n')
 }

@@ -85,8 +85,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // ProposePi
-double ProposePi(const List& cHyp_old, List& cHyp_new, int rep, double logp_max, double logp_min, double logp_scale);
-RcppExport SEXP _FABIO_ProposePi(SEXP cHyp_oldSEXP, SEXP cHyp_newSEXP, SEXP repSEXP, SEXP logp_maxSEXP, SEXP logp_minSEXP, SEXP logp_scaleSEXP) {
+double ProposePi(const List& cHyp_old, List& cHyp_new, int rep, double logp_max, double logp_min, double logp_scale, double beta_a, double beta_b);
+RcppExport SEXP _FABIO_ProposePi(SEXP cHyp_oldSEXP, SEXP cHyp_newSEXP, SEXP repSEXP, SEXP logp_maxSEXP, SEXP logp_minSEXP, SEXP logp_scaleSEXP, SEXP beta_aSEXP, SEXP beta_bSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -96,13 +96,15 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type logp_max(logp_maxSEXP);
     Rcpp::traits::input_parameter< double >::type logp_min(logp_minSEXP);
     Rcpp::traits::input_parameter< double >::type logp_scale(logp_scaleSEXP);
-    rcpp_result_gen = Rcpp::wrap(ProposePi(cHyp_old, cHyp_new, rep, logp_max, logp_min, logp_scale));
+    Rcpp::traits::input_parameter< double >::type beta_a(beta_aSEXP);
+    Rcpp::traits::input_parameter< double >::type beta_b(beta_bSEXP);
+    rcpp_result_gen = Rcpp::wrap(ProposePi(cHyp_old, cHyp_new, rep, logp_max, logp_min, logp_scale, beta_a, beta_b));
     return rcpp_result_gen;
 END_RCPP
 }
 // mcmc_iter
-List mcmc_iter(const int total_step, const int w_step, const int r_pace, const int w_pace, const int n_mh, const int ng_test, const int ni_test, const double h_max, const double h_min, const double h_scale, const int g_max, const int g_min, const double logp_max, const double logp_min, const double logp_scale, const arma::vec& y, arma::vec& z_hat, arma::vec& z, arma::vec& rank_old, arma::vec& beta_old, arma::vec& beta_new, arma::vec& Xtz_old, arma::vec& Xtz_new, arma::vec& Xb_old, arma::vec& Xb_new, const arma::vec& p_gamma, const arma::ivec pos_vec, List& cHyp_old, const arma::mat& X, arma::mat& Xgamma_old, arma::mat& Xgamma_new, arma::mat& XtX_old, arma::mat& XtX_new, arma::mat& Result_hyp, arma::mat& Result_gamma, arma::mat& beta_g, bool display_progress);
-RcppExport SEXP _FABIO_mcmc_iter(SEXP total_stepSEXP, SEXP w_stepSEXP, SEXP r_paceSEXP, SEXP w_paceSEXP, SEXP n_mhSEXP, SEXP ng_testSEXP, SEXP ni_testSEXP, SEXP h_maxSEXP, SEXP h_minSEXP, SEXP h_scaleSEXP, SEXP g_maxSEXP, SEXP g_minSEXP, SEXP logp_maxSEXP, SEXP logp_minSEXP, SEXP logp_scaleSEXP, SEXP ySEXP, SEXP z_hatSEXP, SEXP zSEXP, SEXP rank_oldSEXP, SEXP beta_oldSEXP, SEXP beta_newSEXP, SEXP Xtz_oldSEXP, SEXP Xtz_newSEXP, SEXP Xb_oldSEXP, SEXP Xb_newSEXP, SEXP p_gammaSEXP, SEXP pos_vecSEXP, SEXP cHyp_oldSEXP, SEXP XSEXP, SEXP Xgamma_oldSEXP, SEXP Xgamma_newSEXP, SEXP XtX_oldSEXP, SEXP XtX_newSEXP, SEXP Result_hypSEXP, SEXP Result_gammaSEXP, SEXP beta_gSEXP, SEXP display_progressSEXP) {
+List mcmc_iter(const int total_step, const int w_step, const int r_pace, const int w_pace, const int n_mh, const int ng_test, const int ni_test, const double h_max, const double h_min, const double h_scale, const int g_max, const int g_min, const double logp_max, const double logp_min, const double logp_scale, const double beta_a, const double beta_b, const arma::vec& y, arma::vec& z_hat, arma::vec& z, arma::vec& rank_old, arma::vec& beta_old, arma::vec& beta_new, arma::vec& Xtz_old, arma::vec& Xtz_new, arma::vec& Xb_old, arma::vec& Xb_new, const arma::vec& p_gamma, const arma::ivec pos_vec, List& cHyp_old, const arma::mat& X, arma::mat& Xgamma_old, arma::mat& Xgamma_new, arma::mat& XtX_old, arma::mat& XtX_new, arma::mat& Result_hyp, arma::mat& Result_gamma, arma::mat& beta_g, bool display_progress);
+RcppExport SEXP _FABIO_mcmc_iter(SEXP total_stepSEXP, SEXP w_stepSEXP, SEXP r_paceSEXP, SEXP w_paceSEXP, SEXP n_mhSEXP, SEXP ng_testSEXP, SEXP ni_testSEXP, SEXP h_maxSEXP, SEXP h_minSEXP, SEXP h_scaleSEXP, SEXP g_maxSEXP, SEXP g_minSEXP, SEXP logp_maxSEXP, SEXP logp_minSEXP, SEXP logp_scaleSEXP, SEXP beta_aSEXP, SEXP beta_bSEXP, SEXP ySEXP, SEXP z_hatSEXP, SEXP zSEXP, SEXP rank_oldSEXP, SEXP beta_oldSEXP, SEXP beta_newSEXP, SEXP Xtz_oldSEXP, SEXP Xtz_newSEXP, SEXP Xb_oldSEXP, SEXP Xb_newSEXP, SEXP p_gammaSEXP, SEXP pos_vecSEXP, SEXP cHyp_oldSEXP, SEXP XSEXP, SEXP Xgamma_oldSEXP, SEXP Xgamma_newSEXP, SEXP XtX_oldSEXP, SEXP XtX_newSEXP, SEXP Result_hypSEXP, SEXP Result_gammaSEXP, SEXP beta_gSEXP, SEXP display_progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -121,6 +123,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const double >::type logp_max(logp_maxSEXP);
     Rcpp::traits::input_parameter< const double >::type logp_min(logp_minSEXP);
     Rcpp::traits::input_parameter< const double >::type logp_scale(logp_scaleSEXP);
+    Rcpp::traits::input_parameter< const double >::type beta_a(beta_aSEXP);
+    Rcpp::traits::input_parameter< const double >::type beta_b(beta_bSEXP);
     Rcpp::traits::input_parameter< const arma::vec& >::type y(ySEXP);
     Rcpp::traits::input_parameter< arma::vec& >::type z_hat(z_hatSEXP);
     Rcpp::traits::input_parameter< arma::vec& >::type z(zSEXP);
@@ -143,7 +147,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< arma::mat& >::type Result_gamma(Result_gammaSEXP);
     Rcpp::traits::input_parameter< arma::mat& >::type beta_g(beta_gSEXP);
     Rcpp::traits::input_parameter< bool >::type display_progress(display_progressSEXP);
-    rcpp_result_gen = Rcpp::wrap(mcmc_iter(total_step, w_step, r_pace, w_pace, n_mh, ng_test, ni_test, h_max, h_min, h_scale, g_max, g_min, logp_max, logp_min, logp_scale, y, z_hat, z, rank_old, beta_old, beta_new, Xtz_old, Xtz_new, Xb_old, Xb_new, p_gamma, pos_vec, cHyp_old, X, Xgamma_old, Xgamma_new, XtX_old, XtX_new, Result_hyp, Result_gamma, beta_g, display_progress));
+    rcpp_result_gen = Rcpp::wrap(mcmc_iter(total_step, w_step, r_pace, w_pace, n_mh, ng_test, ni_test, h_max, h_min, h_scale, g_max, g_min, logp_max, logp_min, logp_scale, beta_a, beta_b, y, z_hat, z, rank_old, beta_old, beta_new, Xtz_old, Xtz_new, Xb_old, Xb_new, p_gamma, pos_vec, cHyp_old, X, Xgamma_old, Xgamma_new, XtX_old, XtX_new, Result_hyp, Result_gamma, beta_g, display_progress));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -154,8 +158,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_FABIO_CalcXtX", (DL_FUNC) &_FABIO_CalcXtX, 5},
     {"_FABIO_CalcCC_PVEnZ", (DL_FUNC) &_FABIO_CalcCC_PVEnZ, 4},
     {"_FABIO_ProposeH", (DL_FUNC) &_FABIO_ProposeH, 5},
-    {"_FABIO_ProposePi", (DL_FUNC) &_FABIO_ProposePi, 6},
-    {"_FABIO_mcmc_iter", (DL_FUNC) &_FABIO_mcmc_iter, 37},
+    {"_FABIO_ProposePi", (DL_FUNC) &_FABIO_ProposePi, 8},
+    {"_FABIO_mcmc_iter", (DL_FUNC) &_FABIO_mcmc_iter, 39},
     {NULL, NULL, 0}
 };
 

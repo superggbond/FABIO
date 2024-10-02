@@ -137,19 +137,28 @@ List ProposeH(const List& cHyp_old, int rep, const double h_max, const double h_
 }
 
 // [[Rcpp::export]]
-double ProposePi(const List& cHyp_old, List& cHyp_new, int rep, double logp_max, double logp_min, double logp_scale) {
+double ProposePi(const List& cHyp_old, List& cHyp_new, int rep, double logp_max, double logp_min, double logp_scale, double beta_a, double beta_b) {
   double logp_old = cHyp_old["logp"];
   double logp_new;
   double log_ratio = 0.0;
   double d_logp, temp;
   temp = (logp_max - logp_min) * logp_scale;
   d_logp = std::min(0.1, temp);
-
-  for (int i=0; i<rep; ++i){
-    double ran = runif(1, 0, 1)[0];
-    logp_new = logp_old + (ran - 0.5) * d_logp;
-    if (logp_new < logp_min) {logp_new = 2 * logp_min - logp_new;}
-    if (logp_new > logp_max) {logp_new = 2 * logp_max - logp_new;}
+  
+  if (beta_a==0 & beta_b==0){
+    for (int i=0; i<rep; ++i){
+      double ran = runif(1, 0, 1)[0];
+      logp_new = logp_old + (ran - 0.5) * d_logp;
+      if (logp_new < logp_min) {logp_new = 2 * logp_min - logp_new;}
+      if (logp_new > logp_max) {logp_new = 2 * logp_max - logp_new;}
+      log_ratio = log_ratio + logp_new - logp_old;
+      logp_old = logp_new;
+    }
+  } else {
+    double ran = rbeta(1,beta_a,beta_b)[0];
+    logp_new = log(ran);
+    if (logp_new < logp_min) {logp_new = logp_min;}
+    if (logp_new > logp_max) {logp_new = logp_max;}
     log_ratio = log_ratio + logp_new - logp_old;
     logp_old = logp_new;
   }
@@ -160,7 +169,7 @@ double ProposePi(const List& cHyp_old, List& cHyp_new, int rep, double logp_max,
 // [[Rcpp::export]]
 List mcmc_iter(const int total_step, const int w_step, const int r_pace, const int w_pace, const int n_mh, const int ng_test, const int ni_test,
                const double h_max, const double h_min, const double h_scale, const int g_max, const int g_min,
-               const double logp_max, const double logp_min, const double logp_scale,
+               const double logp_max, const double logp_min, const double logp_scale, const double beta_a, const double beta_b,
                const arma::vec& y, arma::vec& z_hat, arma::vec& z, arma::vec& rank_old, arma::vec& beta_old, arma::vec& beta_new,
                arma::vec& Xtz_old, arma::vec& Xtz_new, arma::vec& Xb_old, arma::vec& Xb_new, const arma::vec& p_gamma,
                const arma::ivec pos_vec, List& cHyp_old, const arma::mat& X, arma::mat& Xgamma_old, arma::mat& Xgamma_new, arma::mat& XtX_old, arma::mat& XtX_new,
@@ -216,7 +225,7 @@ List mcmc_iter(const int total_step, const int w_step, const int r_pace, const i
       logMHratio = logMHratio + (double)ProposeGamma_results["logp"];
 
       // update pi
-      logMHratio = logMHratio + ProposePi(cHyp_old, cHyp_new, rep, logp_max, logp_min, logp_scale);
+      logMHratio = logMHratio + ProposePi(cHyp_old, cHyp_new, rep, logp_max, logp_min, logp_scale, beta_a, beta_b);
 
       if ((int)cHyp_new["n_gamma"] <= 20 || (int)cHyp_old["n_gamma"] <= 20){
         indices = arma::uvec(rank_new.size());

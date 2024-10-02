@@ -1,3 +1,28 @@
+# function to prepare GReX for a single gene
+prepGReX_gene = function(i){
+  tb_weight = read.table(paste0(weight_dir,'/',weight_list[i]))
+  gene = unique(tb_weight[,1])
+  pos = strsplit(tb_weight[,2],':')
+  pos = sapply(pos,'[[',2)
+  pos = as.numeric(pos)
+  end1 = min(pos)
+  end2 = max(pos)
+  
+  # load genotype of selected chr and region
+  plink_cmd = paste0("plink2 --bfile ",geno_dir,"/chr",chr," --chr ",chr," --from-bp ",end1," --to-bp ",end2," --make-bed --out ./temp_files/",gene)
+  system(plink_cmd)
+  
+  geno_file = read.plink(paste0("./temp_files/",gene,".bed"))
+  snp_id = paste0(geno_file$map$chromosome,":",geno_file$map$position)
+  genotype_df = t(scale(as(geno_file$genotypes, "numeric")))
+  genotype_df[is.na(genotype_df)] = 0
+  rownames(genotype_df) = snp_id
+  genotype_df = genotype_df[tb_weight[,2],]
+  
+  grex = as.vector(t(tb_weight[,5])%*%genotype_df)
+  return(c(gene,grex))
+}
+
 # function to calculate Pgamma
 CalcPgamma = function(geo_mean, ng_test) {
   p_gamma = 0:(ng_test - 1)
