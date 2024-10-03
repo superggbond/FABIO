@@ -7,9 +7,13 @@ This page provides a tutorial for TWAS fine-mapping using FABIO. Before runing t
 
 ### FABIO
 The example data for FABIO tutorial can be accessed following this [page](https://superggbond.github.io/FABIO/documentation/03_Data.html). Here are the details about the input data formats and how to run FABIO. 
-### 1. Formats of input data for FABIO
-* Predicted GReX matrix: We require the predicted GReX matrix of the TWAS cohort built up using standard softwares like [PredXican](https://github.com/hakyimlab/MetaXcan) or [BSLMM](https://github.com/genetics-statistics/GEMMA). The input GReX matrix will have gene names as the first column, with the following columns of preicted GReX at individual-level. Each following column represents GReX of genes for an individual.
-* Binary phenotypes: We also require the observed binary phenotypes of the TWAS cohort. The input phenotypes should be formatted as a numeric vector, coded 1 for case and 0 for control. The order of the individuals here should be consistent with the order of columns in the GReX matrix input.
+
+### 1.1 Formats of input files for FABIO
+* Predicted GReX: We require the predicted GReX of the TWAS cohort built up using standard softwares like [PredXican](https://github.com/hakyimlab/MetaXcan) or [BSLMM](https://github.com/genetics-statistics/GEMMA). The input GReX is expected to be a txt or txt.gz file, which has gene names as the first column, with the following columns of preicted GReX at individual-level. Each following column represents GReX of genes for an individual.
+* Binary phenotypes: We also require the observed binary phenotypes of the TWAS cohort. The input phenotypes are expected as a single-column txt file, with 1 coding for case and 0 for control. The order of the individuals here should be consistent with the order of columns in the predicted GReX file.
+
+### 1.2 Preperation of the predicted GReX file
+FABIO provides a function to help generate the predicted GReX file in the FABIO-requested format
 
 ### 2. Running FABIO
 The TWAS fine-mapping can be performed using the following scripts with our example data:
