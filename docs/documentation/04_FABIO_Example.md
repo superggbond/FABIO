@@ -24,6 +24,7 @@ library(FABIO)
 chr <- 22
 geno_dir <- "/path/to/plink/files"
 weight_dir <- './GEUVADIS_BSLMM_weights/chr22'
+# The eQTL weight files can be customized, but should be organized in the same format and file structures as our example files.
 prepGReX(chr, geno_dir, weight_dir)
 # The results will be saved as a file named "grex_for_fabio.txt.gz", in the format illustrated in the section 1.1 above.
 ```
@@ -32,19 +33,36 @@ prepGReX(chr, geno_dir, weight_dir)
 The TWAS fine-mapping can be performed using the following scripts with our example data:
 ```r
 library(FABIO)
-load('/path/to/example.rda')
-grex <- inputs[[1]]
-y <- inputs[[2]]
-output <- fabio(grex, y, w_step=100, s_step=1000)
+
+grex <- data.table::fread('./example_grex.txt.gz')
+pheno <- scan('./example_pheno.txt',numeric())
+fabio(grex, pheno, beta_a=0, beta_b=0, w_step=100, s_step=1000)
+# The output results will be saved as a file named "FABIO_out.csv"
 # w_step and s_step are set to be small for a shorter running time as an example here
 ```
 The inputs are:
-- grex: the predicted GReX matrix
-- y: the TWAS phenotype vector
+- grex: the predicted GReX
+- pheno: the TWAS phenotype vector
+- beta_a: alpha of the prior beta distribution on pi, both beta_a and beta_b are 0 by default, leading to the default uniform prior on log pi
+- beta_b: beta of the prior beta distribution on pi, both beta_a and beta_b are 0 by default, leading to the default uniform prior on log pi
 - w-step: the number of warm-up steps in MCMC, default = 6000
 - s-step: the number of sampling steps in MCMC, default = 20000
 
 ### 3. FABIO output
-FABIO will output a summary table with two columns: 
-- Gene: names of all input genes
-- PIP: corresponding PIPs of all input genes
+FABIO will output a summary table with three columns, and save it as a .csv file:
+|Gene      |PIP  | estFDR|
+|:---------|----:| -----:|
+|DLEU2L    |1    |      0|
+|DNTTIP2   |1    |      0|
+|FAM73A    |1    |      0|
+|FHL3      |1    |      0|
+|PSRC1     |1    |      0|
+|TCTEX1D4  |1    |      0|
+|UBE4B     |1    |      0|
+|GCLM      |0.84 |   0.16|
+|PSMA5     |0.41 |   0.75|
+|FBXO42    |0.4  |      1|
+|...       |...  |...    |
+- Gene: name of each input gene; the genes are ordered decreasingly by PIP
+- PIP: corresponding PIP of each input gene
+- estFDR: estimated FDR using that gene as cutoff
