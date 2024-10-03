@@ -30,6 +30,7 @@ library(FABIO)
 
 chr <- 22
 geno_dir <- "/path/to/plink/files"
-weight_dir <- './BSLMM_weights/chr22'
+weight_dir <- "./BSLMM_weights/chr22"
+prepGReX(chr, geno_dir, weight_dir)
 # The results will be saved as a file named "grex_for_fabio.txt.gz"
 }
