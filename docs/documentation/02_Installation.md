@@ -8,7 +8,7 @@ description: ~
 
 ### Dependencies 
 * R libraries: Rcpp, RcppArmadillo, RcppProgress, data.table, snpStats, parallel, MASS
-* PLINK 2.0 is required, if you'd like to use the helper function to generate GReX input file using plink-style bed files of genotypes and pre-trained eQTL weights 
+* PLINK is required, if you'd like to use the helper function to generate GReX input file using PLINK 1 binary files (.bed+.bim+.fam) of genotypes and pre-trained eQTL weights 
 
 #### 1. Install `FABIO`
 ```r
