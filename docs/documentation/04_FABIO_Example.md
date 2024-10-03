@@ -15,7 +15,18 @@ The example data for FABIO tutorial can be accessed following this [page](https:
 ### 1.2 Preperation of the predicted GReX file
 FABIO provides a function to help generate the predicted GReX file in the FABIO-requested format, with the inputs:
 * PLINK 1 binary files (.bed+.bim+.fam) of genotypes sorted by chromosome. Please refer to this [webpage](https://www.cog-genomics.org/plink/2.0/input#bed) for the details of the format.
-* Pre-trained eQTL weights first sorted by chromosome, then grouped by gene. Example files in the preferred file structures can be downloaded [here](https://www.dropbox.com/scl/fo/fxynm8uvedgvy7ni6hcbt/AAfTQVo89s78DsRNwpBH3lU?dl=0&e=1&preview=GEUVADIS_BSLMM_weights.zip&rlkey=nbqwrdi2r5y1bbojzf7z8ev7h&st=yz28n4nj).
+* Pre-trained eQTL weights first sorted by chromosome, then grouped by gene. The eQTL weights we used in the manuscript in the preferred file structures can be downloaded [here](https://www.dropbox.com/scl/fo/fxynm8uvedgvy7ni6hcbt/AAfTQVo89s78DsRNwpBH3lU?dl=0&e=1&preview=GEUVADIS_BSLMM_weights.zip&rlkey=nbqwrdi2r5y1bbojzf7z8ev7h&st=yz28n4nj). These weights were trained by BSLMM using GEUVADIS data.
+
+This helper function can be applied like this:
+```r
+library(FABIO)
+
+chr <- 22
+geno_dir <- "/path/to/plink/files"
+weight_dir <- './GEUVADIS_BSLMM_weights/chr22'
+prepGReX(chr, geno_dir, weight_dir)
+# The results will be saved as a file named "grex_for_fabio.txt.gz", in the format illustrated in the section 1.1 above.
+```
 
 ### 2. Running FABIO
 The TWAS fine-mapping can be performed using the following scripts with our example data:
