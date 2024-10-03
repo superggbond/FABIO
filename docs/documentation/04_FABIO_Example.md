@@ -51,19 +51,19 @@ The inputs are:
 ### 3. FABIO output
 FABIO will output a summary table with three columns, and save it as a .csv file:
 
-Gene      |PIP  | estFDR
-:---------|----:| -----:
-DLEU2L    |1    |      0
-DNTTIP2   |1    |      0
-FAM73A    |1    |      0
-FHL3      |1    |      0
-PSRC1     |1    |      0
-TCTEX1D4  |1    |      0
-UBE4B     |1    |      0
-GCLM      |0.84 |   0.16
-PSMA5     |0.41 |   0.75
-FBXO42    |0.4  |      1
-...       |...  |...    
+|Gene      |PIP  | estFDR|
+|:---------|----:| -----:|
+|DLEU2L    |1    |      0|
+|DNTTIP2   |1    |      0|
+|FAM73A    |1    |      0|
+|FHL3      |1    |      0|
+|PSRC1     |1    |      0|
+|TCTEX1D4  |1    |      0|
+|UBE4B     |1    |      0|
+|GCLM      |0.84 |   0.16|
+|PSMA5     |0.41 |   0.75|
+|FBXO42    |0.4  |      1|
+
 - Gene: name of each input gene; the genes are ordered decreasingly by PIP
 - PIP: corresponding PIP of each input gene
 - estFDR: estimated FDR using that gene as cutoff
