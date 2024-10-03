@@ -50,6 +50,7 @@ The inputs are:
 
 ### 3. FABIO output
 FABIO will output a summary table with three columns, and save it as a .csv file:
+
 Gene      |PIP  | estFDR
 :---------|----:| -----:
 DLEU2L    |1    |      0
