@@ -5,7 +5,7 @@ description: ~
 ---
 This page provides a tutorial for TWAS fine-mapping using FABIO. Before runing the example code, make sure that the FABIO software is installed successfully. For instructions on installation, please see the [Installation section](https://superggbond.github.io/FABIO/documentation/02_Installation.html).
 
-## FABIO
+### FABIO
 The example data for FABIO tutorial can be accessed following this [page](https://superggbond.github.io/FABIO/documentation/03_Data.html). Here are the details about the input data formats and how to run FABIO. 
 ### 1. Formats of input data for FABIO
 * Predicted GReX matrix: We require the predicted GReX matrix of the TWAS cohort built up using standard softwares like [PredXican](https://github.com/hakyimlab/MetaXcan) or [BSLMM](https://github.com/genetics-statistics/GEMMA). The input GReX matrix will have gene names as the first column, with the following columns of preicted GReX at individual-level. Each following column represents GReX of genes for an individual.
