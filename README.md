@@ -14,6 +14,6 @@ For any questions or feedbacks on FABIO software, please email to Haihan Zhang (
 
 ## Citation
 
-Haihan Zhang, Kevin He, Lam C. Tsoi, and Xiang Zhou#. FABIO: TWAS Fine-mapping to Prioritize Causal Genes for Binary Traits.
+Zhang, Haihan, Kevin He, Zheng Li, Lam C. Tsoi, and Xiang Zhou. "FABIO: TWAS fine-mapping to prioritize causal genes for binary traits." PLoS genetics 20, no. 12 (2024): e1011503.
 
 
